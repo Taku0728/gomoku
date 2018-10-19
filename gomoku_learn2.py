@@ -10,7 +10,7 @@ from gomoku import *
 from search import *
 size = 9
 # 計算グラフの構築
-n_epoch = 10000
+n_epoch = 100
 model_v = tf_model_v()
 model_p = tf_model_p()
 

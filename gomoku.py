@@ -30,13 +30,6 @@ size = 9
 
 # 五目並べのプログラム
 
-seq = [
-    ('size', int32),
-    ('square', int32),
-    ('turn', int32)
-]
-
-
 # @jitclass
 class Game:
     # コンストラクタ

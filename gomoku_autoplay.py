@@ -18,8 +18,8 @@ for n in range(100):
     for i in range(size*size):
         ep = 0
         g.aout()
-        # policy_out(g, model_p, scale=True)
-        value_out(g, model_v)
+        policy_out(g, model_p, scale=True)
+        # value_out(g, model_v)
         start = time()
         if g.turn == (1 if n % 2 == 0 else -1):
             # g.rand_put()
