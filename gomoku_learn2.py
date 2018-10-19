@@ -5,17 +5,21 @@ import copy
 from time import time
 from gomoku import *
 from search import *
+import json
+
 size = 9
 # 計算グラフの構築
-n_epoch = 100
+n_epoch = 1000
 model_v = tf_model_v()
 model_p = tf_model_p()
 
 # 学習
 trail = 0
 g = Game()
-loss = []
-accuracy = []
+# logs = []
+# with open('logs.json') as f:
+#     logs = json.load(f)
+
 for epoch in range(n_epoch):
     x_batch_v = []
     t_batch_v = []
@@ -92,17 +96,16 @@ for epoch in range(n_epoch):
     perm = np.random.permutation(len(x_batch_v))
     x_batch_v, t_batch_v = [x_batch_v[p]
                             for p in perm], [t_batch_v[p] for p in perm]
-    loss.append(model_v.optimize(x_batch_v, t_batch_v))
+    loss = model_v.optimize(x_batch_v, t_batch_v)
 
     perm = np.random.permutation(len(x_batch_p))
     x_batch_p, t_batch_p = [x_batch_p[p]
                             for p in perm], [t_batch_p[p] for p in perm]
-    if len(x_batch_p) > 0:
-        accuracy.append(model_p.optimize(x_batch_p, t_batch_p))
-    else:
-        accuracy.append(np.mean(accuracy[-100:]))
-        print('no', end='')
+    accuracy = model_p.optimize(x_batch_p, t_batch_p)
+
     end = time()
-    print("time:{0:.3f} | ".format(end - start), end='')
-    print('Ave Loss %.3f | Ave Accuracy %.4f' %
-          (np.mean(loss[-100:]), np.mean(accuracy[-100:])))
+    # logs.append({'time': end - start, 'loss': loss, 'accuracy': accuracy})
+    print("time:{0:.3f} | Loss {1:.3f} | Accuracy {2:.4f}".format(
+        end - start, loss, accuracy))
+    # with open('logs.json', 'w') as f:
+    #     json.dump(logs, f, indent=4)
