@@ -26,7 +26,7 @@ for epoch in range(n_epoch):
     t_batch_p = []
     print('epoch %d | ' % epoch, end='')
     start = time()
-    while len(x_batch_p) < 256:
+    while len(x_batch_p) < 512:
         # 自己対戦で学習
         g.__init__()
         g_history = []
@@ -39,9 +39,9 @@ for epoch in range(n_epoch):
                 g.rand_put()
             if rd.random() < 1:
                 g = alpbet_choose(g, model_v, model_p, 2,
-                                  width=2, randomize=1e-8)
+                                  width=2, randomize=1e-10)
             elif rd.random() < 1:
-                g = value_choose(g, model_v, randomize=1e-8)
+                g = value_choose(g, model_v, randomize=1e-10)
             else:
                 g = policy_choose(g, model_p, randomize=0.1)
             # g.aout()

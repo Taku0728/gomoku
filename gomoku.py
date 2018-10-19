@@ -624,7 +624,7 @@ class tf_model_v:
         self.logs_path = './log_v/'
         self.saver = tf.train.Saver()
         self.cost = tf.reduce_mean(tf.square(self.y - self.t))
-        self.optimizer = tf.train.GradientDescentOptimizer(1e-2).minimize(self.cost)
+        self.optimizer = tf.train.GradientDescentOptimizer(2e-2).minimize(self.cost)
         self.train_summary_loss = tf.summary.scalar('train_loss', self.cost)
         self.saver = tf.train.Saver()
         self.summary_writer = tf.summary.FileWriter(
