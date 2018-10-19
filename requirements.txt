@@ -2,7 +2,6 @@ tensorflow
 numpy
 PIL
 matplotlib
-numba
 functools
 math
 random
