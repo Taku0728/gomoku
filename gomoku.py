@@ -17,7 +17,6 @@ import copy
 import os
 import shutil
 # from numba import jit, jitclass, int32, float32, typeof, deferred_type
-from functools import reduce
 from math import exp, log, sqrt
 from mymath import *
 
