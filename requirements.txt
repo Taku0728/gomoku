@@ -1,9 +1,3 @@
 tensorflow
 numpy
 matplotlib
-math
-random
-os
-shutil
-copy
-time
