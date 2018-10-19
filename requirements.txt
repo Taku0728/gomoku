@@ -1,6 +1,5 @@
 tensorflow
 numpy
-PIL
 matplotlib
 functools
 math

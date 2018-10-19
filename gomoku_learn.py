@@ -1,9 +1,6 @@
 import tensorflow as tf
 import numpy as np
 import random as rd
-import matplotlib.pyplot as plt
-import matplotlib.animation as anm
-from PIL import Image, ImageDraw
 import copy
 from gomoku import *
 
