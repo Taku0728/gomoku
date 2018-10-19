@@ -5,6 +5,5 @@ math
 random
 os
 shutil
-functools
 copy
 time
