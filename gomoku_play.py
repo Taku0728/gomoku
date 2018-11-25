@@ -12,7 +12,7 @@ for i in range(size*size):
     if i % 2 is 0:
         g.input_put()
     else:
-        g = best_game(g, model)
+
         g.aout()
         if g.end_game() != 0:
             break

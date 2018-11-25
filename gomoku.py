@@ -13,10 +13,13 @@ import tensorflow as tf
 import numpy as np
 import random as rd
 import matplotlib.pyplot as plt
+import matplotlib.animation as anm
+from PIL import Image, ImageDraw
 import copy
 import os
 import shutil
-# from numba import jit, jitclass, int32, float32, typeof, deferred_type
+from numba import jit, jitclass, int32, float32, typeof, deferred_type
+from functools import reduce
 from math import exp, log, sqrt
 from mymath import *
 
@@ -26,6 +29,13 @@ from mymath import *
 size = 9
 
 # 五目並べのプログラム
+
+seq = [
+    ('size', int32),
+    ('square', int32),
+    ('turn', int32)
+]
+
 
 # @jitclass
 class Game:
@@ -614,7 +624,7 @@ class tf_model_v:
         self.logs_path = './log_v/'
         self.saver = tf.train.Saver()
         self.cost = tf.reduce_mean(tf.square(self.y - self.t))
-        self.optimizer = tf.train.GradientDescentOptimizer(2e-2).minimize(self.cost)
+        self.optimizer = tf.train.AdamOptimizer(1e-2).minimize(self.cost)
         self.train_summary_loss = tf.summary.scalar('train_loss', self.cost)
         self.saver = tf.train.Saver()
         self.summary_writer = tf.summary.FileWriter(
@@ -662,8 +672,8 @@ class tf_model_p:
         self.saver = tf.train.Saver()
         self.cross_entropy = tf.losses.softmax_cross_entropy(
             onehot_labels=self.t, logits=self.y)
-        self.optimizer = tf.train.GradientDescentOptimizer(
-            1e-2).minimize(self.cross_entropy)
+        self.optimizer = tf.train.AdamOptimizer(
+            1e-5).minimize(self.cross_entropy)
         self.accuracy = tf.reduce_mean(
             tf.cast(tf.equal(tf.argmax(self.y, 1), tf.argmax(self.t, 1)), tf.float32))
         self.summary_accuracy = tf.summary.scalar('train_loss', self.accuracy)
